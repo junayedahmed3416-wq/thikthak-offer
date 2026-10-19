@@ -22,10 +22,12 @@ C) Admin panel
 3. A ধাপে পাওয়া Web app URL এবং Code.gs-এ সেট করা ADMIN_KEY দিন। “অর্ডার দেখুন / Refresh” চাপুন।
 4. অর্ডারগুলো দেখা যাবে; প্রতিটি অর্ডারের স্ট্যাটাস পরিবর্তন করে Save করা যাবে।
 
+কাস্টমার অর্ডার ফর্ম জমা দিলে অর্ডারটি Google Sheet-এ সংরক্ষিত হবে এবং Admin Panel-এ দেখাবে। WhatsApp শুধু যোগাযোগের লিংক; এটি অর্ডার সাবমিশন করবে না।
+
 গুরুত্বপূর্ণ নিরাপত্তা/কার্যকারিতা নোট
 - Admin key শুধু admin panel-এ ব্যবহার করবেন; কখনো index.html-এ key বসাবেন না।
 - Google Apps Script “Anyone” access-এর কারণে create-order endpoint জনসাধারণের জন্য উন্মুক্ত থাকবে; অপ্রয়োজনীয় spam হতে পারে। অর্ডার নিশ্চিত করার আগে ফোনে যাচাই করুন।
 - Admin API key URL query-তে যায়, তাই shared/public device ব্যবহার করবেন না। উন্নত নিরাপত্তার জন্য আলাদা authenticated backend প্রয়োজন।
-- Browser CORS/Google deployment সমস্যা হলে WhatsApp order button fallback হিসেবে থাকবে।
+- Browser CORS/Google deployment সমস্যা হলে অর্ডার জমা হবে না; deployment সেটিংস ঠিক করে আবার পরীক্ষা করুন।
 - মূল্য: প্রতি কম্বো ৳৯৯০, আগের মূল্য ৳১,২৫০; ঢাকা জেলা delivery ৳৭০, ঢাকার বাইরে ৳১১০।
-- Google Sheet-এ অর্ডার জমা হওয়ার পরই website submission সফল বলে দেখাবে। WhatsApp বাটন আলাদা; WhatsApp-এ Send চাপা গ্রাহকের দায়িত্ব।
+- Google Sheet-এ অর্ডার জমা হওয়ার পরই website submission সফল বলে দেখাবে। অর্ডার সম্পূর্ণভাবে ওয়েবসাইটের ফর্মের মাধ্যমে জমা হবে; WhatsApp-এ পাঠানোর ধাপ নেই।
