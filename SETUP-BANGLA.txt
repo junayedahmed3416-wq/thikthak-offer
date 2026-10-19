@@ -1,0 +1,31 @@
+THIKTHAK WEBSITE ORDER + ADMIN PANEL SETUP (একবার করতে হবে)
+
+এই ZIP-এ landing page, admin.html এবং Code.gs backend রয়েছে। GitHub Pages একা অর্ডারগুলো নিরাপদে সার্ভারে জমা রাখতে পারে না; তাই Google Sheets + Apps Script ব্যবহার করা হয়েছে। সেটআপ না করলে WhatsApp order button কাজ করবে, কিন্তু website submission database-এ জমা হবে না।
+
+A) Google Sheet backend তৈরি
+1. https://script.google.com/ খুলে New project নিন।
+2. Code.gs ফাইলে থাকা ডিফল্ট কোড মুছে ZIP-এর Code.gs-এর সম্পূর্ণ কোড পেস্ট করুন।
+3. কোডের উপরের ADMIN_KEY মানটি নিজের দীর্ঘ, অনুমান করা কঠিন গোপন key দিয়ে বদলান। এই key কাউকে দেবেন না।
+4. Save করুন। Deploy > New deployment > Select type: Web app.
+5. Execute as: Me নির্বাচন করুন। Who has access: Anyone নির্বাচন করুন (public order submission-এর জন্য)। Deploy চাপুন এবং অনুমতি চাইলে অনুমোদন দিন।
+6. Web app URL কপি করুন। প্রথম অর্ডার জমা হলে Google Sheet স্বয়ংক্রিয়ভাবে তৈরি হবে; script owner-এর Google Drive-এ “ThikThak Website Orders” নামে থাকবে।
+
+B) Landing page সংযুক্ত করা
+1. index.html খুলুন।
+2. `const ORDER_API_URL = "PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE";` লাইন খুঁজুন।
+3. placeholder-এর জায়গায় Deploy থেকে পাওয়া URL বসান। URL-টি `https://script.google.com/macros/s/.../exec` ধরনের হবে।
+4. index.html এবং অন্য সব ছবি/logo ফাইল GitHub repo-র main branch-এ upload/replace করুন।
+
+C) Admin panel
+1. admin.html একই GitHub Pages repo-তে রাখুন।
+2. আপনার সাইটের `admin.html` URL খুলুন।
+3. A ধাপে পাওয়া Web app URL এবং Code.gs-এ সেট করা ADMIN_KEY দিন। “অর্ডার দেখুন / Refresh” চাপুন।
+4. অর্ডারগুলো দেখা যাবে; প্রতিটি অর্ডারের স্ট্যাটাস পরিবর্তন করে Save করা যাবে।
+
+গুরুত্বপূর্ণ নিরাপত্তা/কার্যকারিতা নোট
+- Admin key শুধু admin panel-এ ব্যবহার করবেন; কখনো index.html-এ key বসাবেন না।
+- Google Apps Script “Anyone” access-এর কারণে create-order endpoint জনসাধারণের জন্য উন্মুক্ত থাকবে; অপ্রয়োজনীয় spam হতে পারে। অর্ডার নিশ্চিত করার আগে ফোনে যাচাই করুন।
+- Admin API key URL query-তে যায়, তাই shared/public device ব্যবহার করবেন না। উন্নত নিরাপত্তার জন্য আলাদা authenticated backend প্রয়োজন।
+- Browser CORS/Google deployment সমস্যা হলে WhatsApp order button fallback হিসেবে থাকবে।
+- মূল্য: প্রতি কম্বো ৳৯৯০, আগের মূল্য ৳১,২৫০; ঢাকা জেলা delivery ৳৭০, ঢাকার বাইরে ৳১১০।
+- Google Sheet-এ অর্ডার জমা হওয়ার পরই website submission সফল বলে দেখাবে। WhatsApp বাটন আলাদা; WhatsApp-এ Send চাপা গ্রাহকের দায়িত্ব।
